@@ -1,0 +1,8 @@
+yc_token            = "y0_AgAA..."
+yc_cloud_id         = "b1g..."
+yc_folder_id        = "b1g..."
+yc_zone             = "ru-central1-a"
+vm_cores            = 2
+vm_memory_gb        = 4
+ssh_public_key_path = "~/.ssh/id_rsa.pub"
+repo_url            = "https://github.com/<your-login>/ml-churn-system.git"

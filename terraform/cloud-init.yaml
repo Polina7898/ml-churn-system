@@ -1,0 +1,32 @@
+#cloud-config
+package_update: true
+package_upgrade: false
+
+packages:
+  - git
+  - curl
+  - ca-certificates
+
+write_files:
+  - path: /opt/bootstrap.sh
+    permissions: "0755"
+    content: |
+      #!/bin/bash
+      set -euxo pipefail
+
+      curl -fsSL https://get.docker.com | sh
+      systemctl enable --now docker
+
+      DOCKER_CONFIG=/usr/local/lib/docker/cli-plugins
+      mkdir -p $DOCKER_CONFIG
+      curl -SL https://github.com/docker/compose/releases/download/v2.24.5/docker-compose-linux-x86_64 \
+        -o $DOCKER_CONFIG/docker-compose
+      chmod +x $DOCKER_CONFIG/docker-compose
+
+      cd /opt
+      git clone ${repo_url} ml-churn-system
+      cd ml-churn-system
+      docker compose up -d --build
+
+runcmd:
+  - bash /opt/bootstrap.sh

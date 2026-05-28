@@ -1,0 +1,12 @@
+.git
+.github
+.venv
+__pycache__
+*.pyc
+models/
+mlruns/
+.pytest_cache
+docs/
+terraform/
+tests/
+*.md
